@@ -9,13 +9,16 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "node server/server.cjs",
-    "dev:full": "concurrently \"npm run server\" \"npm run dev\""
+    "dev:full": "concurrently \"npm run server\" \"npm run dev\"",
+    "deploy": "vercel --prod",
+    "dev:vercel": "vercel dev"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.3.4",
     "@tailwindcss/vite": "^4.1.14",
+    "better-sqlite3": "^12.4.1",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "react": "^19.1.1",

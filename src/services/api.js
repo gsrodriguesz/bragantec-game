@@ -1,5 +1,7 @@
 // Configuração da API
-const API_BASE_URL = 'http://localhost:3001/api';
+const API_BASE_URL = process.env.NODE_ENV === 'production'
+    ? '/api'  // Vercel serverless functions
+    : 'http://localhost:3001/api';  // Local development
 
 // Função utilitária para fazer requisições
 const apiRequest = async (endpoint, options = {}) => {
