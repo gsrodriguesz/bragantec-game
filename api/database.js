@@ -1,51 +1,42 @@
-// Database utilities for Vercel serverless functions
-import Database from 'better-sqlite3';
-import path from 'path';
+// Simple in-memory database for Vercel serverless functions
+// This avoids native dependencies issues with better-sqlite3
 
-let db = null;
+let users = [];
+let nextId = 1;
 
-// Initialize database connection (singleton pattern)
-export function getDatabase() {
-    if (!db) {
-        // For Vercel, we'll use an in-memory database that persists during function execution
-        // In production, you might want to use a cloud database like PlanetScale, Supabase, etc.
-        db = new Database(':memory:');
-
-        // Create users table
-        db.exec(`
-            CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                playerName TEXT UNIQUE NOT NULL,
-                playerAvatar TEXT NOT NULL,
-                level INTEGER DEFAULT 1,
-                totalXp INTEGER DEFAULT 0,
-                coins INTEGER DEFAULT 0,
-                completedMissions TEXT DEFAULT '[]',
-                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-                lastActive DATETIME DEFAULT CURRENT_TIMESTAMP
-            )
-        `);
-    }
-    return db;
-}
-
-// User controller functions
+// User controller functions using simple in-memory storage
 export const userController = {
     // Create or update user
     saveUser: (userData) => {
-        const db = getDatabase();
         const { playerName, playerAvatar, level, totalXp, coins, completedMissions } = userData;
-        const missionsJson = JSON.stringify(completedMissions || []);
 
         try {
-            const stmt = db.prepare(`
-                INSERT OR REPLACE INTO users 
-                (playerName, playerAvatar, level, totalXp, coins, completedMissions, lastActive)
-                VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
-            `);
+            // Find existing user
+            const existingIndex = users.findIndex(user => user.playerName === playerName);
 
-            const result = stmt.run(playerName, playerAvatar, level || 1, totalXp || 0, coins || 0, missionsJson);
-            return { id: result.lastInsertRowid, success: true };
+            const userRecord = {
+                playerName,
+                playerAvatar,
+                level: level || 1,
+                totalXp: totalXp || 0,
+                coins: coins || 0,
+                completedMissions: completedMissions || [],
+                lastActive: new Date().toISOString(),
+                createdAt: new Date().toISOString()
+            };
+
+            if (existingIndex >= 0) {
+                // Update existing user
+                userRecord.id = users[existingIndex].id;
+                userRecord.createdAt = users[existingIndex].createdAt;
+                users[existingIndex] = userRecord;
+                return { id: userRecord.id, success: true };
+            } else {
+                // Create new user
+                userRecord.id = nextId++;
+                users.push(userRecord);
+                return { id: userRecord.id, success: true };
+            }
         } catch (error) {
             throw new Error(`Error saving user: ${error.message}`);
         }
@@ -53,18 +44,16 @@ export const userController = {
 
     // Get all users
     getAllUsers: () => {
-        const db = getDatabase();
         try {
-            const stmt = db.prepare('SELECT * FROM users ORDER BY totalXp DESC, level DESC');
-            const rows = stmt.all();
-
-            // Convert completedMissions from JSON string to array
-            const users = rows.map(user => ({
-                ...user,
-                completedMissions: JSON.parse(user.completedMissions || '[]')
-            }));
-
-            return users;
+            // Sort by totalXp desc, then by level desc
+            return users
+                .slice()
+                .sort((a, b) => {
+                    if (b.totalXp !== a.totalXp) {
+                        return b.totalXp - a.totalXp;
+                    }
+                    return b.level - a.level;
+                });
         } catch (error) {
             throw new Error(`Error getting users: ${error.message}`);
         }
@@ -72,16 +61,9 @@ export const userController = {
 
     // Get specific user
     getUser: (playerName) => {
-        const db = getDatabase();
         try {
-            const stmt = db.prepare('SELECT * FROM users WHERE playerName = ?');
-            const row = stmt.get(playerName);
-
-            if (row) {
-                row.completedMissions = JSON.parse(row.completedMissions || '[]');
-                return row;
-            }
-            return null;
+            const user = users.find(user => user.playerName === playerName);
+            return user || null;
         } catch (error) {
             throw new Error(`Error getting user: ${error.message}`);
         }
@@ -89,11 +71,13 @@ export const userController = {
 
     // Update last active
     updateLastActive: (playerName) => {
-        const db = getDatabase();
         try {
-            const stmt = db.prepare('UPDATE users SET lastActive = CURRENT_TIMESTAMP WHERE playerName = ?');
-            const result = stmt.run(playerName);
-            return { success: result.changes > 0 };
+            const userIndex = users.findIndex(user => user.playerName === playerName);
+            if (userIndex >= 0) {
+                users[userIndex].lastActive = new Date().toISOString();
+                return { success: true };
+            }
+            return { success: false };
         } catch (error) {
             throw new Error(`Error updating activity: ${error.message}`);
         }
@@ -101,11 +85,11 @@ export const userController = {
 
     // Clear all data
     clearAllData: () => {
-        const db = getDatabase();
         try {
-            const stmt = db.prepare('DELETE FROM users');
-            const result = stmt.run();
-            return { success: true, deletedRows: result.changes };
+            const deletedCount = users.length;
+            users.length = 0; // Clear array
+            nextId = 1; // Reset ID counter
+            return { success: true, deletedRows: deletedCount };
         } catch (error) {
             throw new Error(`Error clearing data: ${error.message}`);
         }
