@@ -1,36 +1,104 @@
 import { MongoClient } from 'mongodb';
-import { memoryUserController } from './database-memory.js';
 
 let client = null;
 let db = null;
 let useMemoryFallback = false;
 
-async function getDatabase() {
-    if (!client) {
-        const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017';
+// In-memory fallback storage
+let memoryUsers = [];
+let nextId = 1;
 
-        if (!uri || uri === 'mongodb://localhost:27017') {
-            throw new Error(`
-❌ MongoDB não configurado!
+const memoryUserController = {
+    saveUser: async (userData) => {
+        const { playerName, playerAvatar, level, totalXp, coins, completedMissions } = userData;
 
-Para desenvolvimento local:
-1. Instale MongoDB Community Server
-2. Configure MONGODB_URI=mongodb://localhost:27017 no .env.local
+        const existingIndex = memoryUsers.findIndex(user => user.playerName === playerName);
 
-Para MongoDB Atlas:
-1. Crie conta em https://cloud.mongodb.com/
-2. Configure MONGODB_URI com sua connection string
-3. Configure MONGODB_DATABASE=bragantec
+        const userRecord = {
+            _id: existingIndex >= 0 ? memoryUsers[existingIndex]._id : nextId++,
+            playerName,
+            playerAvatar,
+            level: level || 1,
+            totalXp: totalXp || 0,
+            coins: coins || 0,
+            completedMissions: completedMissions || [],
+            lastActive: new Date(),
+            updatedAt: new Date(),
+            createdAt: existingIndex >= 0 ? memoryUsers[existingIndex].createdAt : new Date()
+        };
 
-Arquivo .env.local deve conter:
-MONGODB_URI=mongodb://localhost:27017
-MONGODB_DATABASE=bragantec
-            `);
+        if (existingIndex >= 0) {
+            memoryUsers[existingIndex] = userRecord;
+        } else {
+            memoryUsers.push(userRecord);
         }
 
-        client = new MongoClient(uri);
-        await client.connect();
-        console.log('✅ Connected to MongoDB:', uri.includes('localhost') ? 'Local' : 'Atlas');
+        console.log(`💾 [Memory DB] User saved: ${playerName}`);
+        return {
+            id: userRecord._id,
+            success: true,
+            modified: existingIndex >= 0,
+            created: existingIndex < 0
+        };
+    },
+
+    getAllUsers: async () => {
+        return memoryUsers
+            .slice()
+            .sort((a, b) => {
+                if (b.totalXp !== a.totalXp) {
+                    return b.totalXp - a.totalXp;
+                }
+                return b.level - a.level;
+            });
+    },
+
+    getUser: async (playerName) => {
+        return memoryUsers.find(user => user.playerName === playerName) || null;
+    },
+
+    updateLastActive: async (playerName) => {
+        const userIndex = memoryUsers.findIndex(user => user.playerName === playerName);
+        if (userIndex >= 0) {
+            memoryUsers[userIndex].lastActive = new Date();
+            memoryUsers[userIndex].updatedAt = new Date();
+            return { success: true };
+        }
+        return { success: false };
+    },
+
+    clearAllData: async () => {
+        const deletedCount = memoryUsers.length;
+        memoryUsers.length = 0;
+        nextId = 1;
+        console.log(`🗑️ [Memory DB] Cleared ${deletedCount} users`);
+        return { success: true, deletedRows: deletedCount };
+    }
+};
+
+async function getDatabase() {
+    if (useMemoryFallback) {
+        return null; // Indica que deve usar memory fallback
+    }
+
+    if (!client) {
+        const uri = process.env.MONGODB_URI;
+
+        if (!uri) {
+            console.log('⚠️ MongoDB URI não configurado, usando fallback em memória');
+            useMemoryFallback = true;
+            return null;
+        }
+
+        try {
+            client = new MongoClient(uri);
+            await client.connect();
+            console.log('✅ Connected to MongoDB:', uri.includes('localhost') ? 'Local' : 'Atlas');
+        } catch (error) {
+            console.log('⚠️ Falha ao conectar MongoDB, usando fallback em memória:', error.message);
+            useMemoryFallback = true;
+            return null;
+        }
     }
 
     if (!db) {
@@ -42,10 +110,15 @@ MONGODB_DATABASE=bragantec
 
 export const userController = {
     saveUser: async (userData) => {
-        const { playerName, playerAvatar, level, totalXp, coins, completedMissions } = userData;
-
         try {
             const db = await getDatabase();
+
+            // Use memory fallback if MongoDB not available
+            if (!db) {
+                return await memoryUserController.saveUser(userData);
+            }
+
+            const { playerName, playerAvatar, level, totalXp, coins, completedMissions } = userData;
             const collection = db.collection('users');
 
             const userRecord = {
@@ -81,8 +154,13 @@ export const userController = {
     getAllUsers: async () => {
         try {
             const db = await getDatabase();
-            const collection = db.collection('users');
 
+            // Use memory fallback if MongoDB not available
+            if (!db) {
+                return await memoryUserController.getAllUsers();
+            }
+
+            const collection = db.collection('users');
             const users = await collection
                 .find({})
                 .sort({ totalXp: -1, level: -1 })
@@ -97,8 +175,13 @@ export const userController = {
     getUser: async (playerName) => {
         try {
             const db = await getDatabase();
-            const collection = db.collection('users');
 
+            // Use memory fallback if MongoDB not available
+            if (!db) {
+                return await memoryUserController.getUser(playerName);
+            }
+
+            const collection = db.collection('users');
             const user = await collection.findOne({ playerName: playerName });
             return user;
         } catch (error) {
@@ -109,8 +192,13 @@ export const userController = {
     updateLastActive: async (playerName) => {
         try {
             const db = await getDatabase();
-            const collection = db.collection('users');
 
+            // Use memory fallback if MongoDB not available
+            if (!db) {
+                return await memoryUserController.updateLastActive(playerName);
+            }
+
+            const collection = db.collection('users');
             const result = await collection.updateOne(
                 { playerName: playerName },
                 {
@@ -130,8 +218,13 @@ export const userController = {
     clearAllData: async () => {
         try {
             const db = await getDatabase();
-            const collection = db.collection('users');
 
+            // Use memory fallback if MongoDB not available
+            if (!db) {
+                return await memoryUserController.clearAllData();
+            }
+
+            const collection = db.collection('users');
             const result = await collection.deleteMany({});
             return { success: true, deletedRows: result.deletedCount };
         } catch (error) {
