@@ -55,8 +55,8 @@ O **Bragantec Game** é uma plataforma web gamificada desenvolvida para ser apre
 - **React Router DOM** - Navegação SPA
 
 ### Backend
-- **Express.js 5.1.0** - Framework web para Node.js
-- **SQLite3 5.1.7** - Banco de dados leve e eficiente
+- **MongoDB** - Banco de dados NoSQL na nuvem (MongoDB Atlas)
+- **Vercel Serverless Functions** - API sem servidor
 - **CORS** - Controle de acesso entre origens
 
 ### DevTools
@@ -80,26 +80,29 @@ cd bragantec-game
 npm install
 ```
 
-### 3. Execute o sistema completo
+### 3. Configure o MongoDB
 ```bash
-# Inicia frontend + backend simultaneamente
-npm run dev:full
+# Copie o arquivo de exemplo
+cp .env.example .env.local
+
+# Configure suas credenciais do MongoDB Atlas
+# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/
+# MONGODB_DATABASE=bragantec
 ```
 
-### Ou execute separadamente:
-
+### 4. Execute o sistema
 ```bash
-# Terminal 1 - Backend (API)
-npm run server
-
-# Terminal 2 - Frontend
+# Para desenvolvimento local
 npm run dev
+
+# Para testar com ambiente Vercel
+npm run dev:vercel
 ```
 
-### 4. Acesse a aplicação
+### 5. Acesse a aplicação
 - **Frontend**: http://localhost:5173
-- **API**: http://localhost:3001
-- **Health Check**: http://localhost:3001/api/health
+- **API**: http://localhost:3000/api (com vercel dev)
+- **Health Check**: http://localhost:3000/api/health
 
 ## 🎯 Como Usar
 
@@ -122,10 +125,11 @@ npm run dev
 ```
 bragantec/
 ├── public/                 # Arquivos estáticos
-├── server/                 # Backend API
-│   ├── server.cjs         # Servidor Express
-│   ├── database.cjs       # Controlador SQLite
-│   └── bragantec.db       # Banco de dados (auto-gerado)
+├── api/                    # Serverless Functions (Backend)
+│   ├── health.js          # Health check endpoint
+│   ├── users.js           # CRUD usuários
+│   ├── database.js        # Controlador MongoDB
+│   └── users/             # Endpoints específicos de usuário
 ├── src/
 │   ├── Components/        # Componentes React
 │   │   ├── AdminPanel/    # Painel administrativo
@@ -211,21 +215,21 @@ O painel administrativo oferece:
 ## 📝 Scripts Disponíveis
 
 ```bash
-npm run dev          # Inicia apenas o frontend
-npm run server       # Inicia apenas o backend
-npm run dev:full     # Inicia frontend + backend
+npm run dev          # Inicia frontend (Vite)
+npm run dev:vercel   # Simula ambiente Vercel localmente
 npm run build        # Build de produção
-npm run preview      # Preview do build
+npm run preview      # Preview do build  
 npm run lint         # Verificação de código
+npm run deploy       # Deploy para Vercel
 ```
 
 ## 🐛 Troubleshooting
 
 ### Problema: API não conecta
-**Solução**: Verifique se o servidor backend está rodando na porta 3001
+**Solução**: Verifique se as variáveis MONGODB_URI e MONGODB_DATABASE estão configuradas
 
 ### Problema: Dados não salvam
-**Solução**: O sistema usa fallback para localStorage quando a API está indisponível
+**Solução**: Verifique a conexão com MongoDB Atlas e as credenciais de acesso
 
 ### Problema: Página em branco
 **Solução**: Execute `npm install` e `npm run dev:full`

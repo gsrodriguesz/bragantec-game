@@ -1,7 +1,7 @@
 // User activity endpoint
 import { userController } from '../../database.js';
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
     // Enable CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'PUT, OPTIONS');
@@ -23,7 +23,7 @@ export default function handler(req, res) {
     }
 
     try {
-        const result = userController.updateLastActive(decodeURIComponent(playerName));
+        const result = await userController.updateLastActive(decodeURIComponent(playerName));
         return res.status(200).json({
             message: 'Atividade atualizada com sucesso',
             data: result

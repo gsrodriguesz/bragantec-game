@@ -1,7 +1,7 @@
 // Individual user endpoint
 import { userController } from '../database.js';
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
     // Enable CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, OPTIONS');
@@ -21,9 +21,9 @@ export default function handler(req, res) {
     try {
         switch (req.method) {
             case 'GET':
-                return handleGetUser(req, res, playerName);
+                return await handleGetUser(req, res, playerName);
             case 'PUT':
-                return handleUpdateUser(req, res, playerName);
+                return await handleUpdateUser(req, res, playerName);
             default:
                 return res.status(405).json({ error: 'Method not allowed' });
         }
@@ -33,9 +33,9 @@ export default function handler(req, res) {
     }
 }
 
-function handleGetUser(req, res, playerName) {
+async function handleGetUser(req, res, playerName) {
     try {
-        const user = userController.getUser(decodeURIComponent(playerName));
+        const user = await userController.getUser(decodeURIComponent(playerName));
 
         if (user) {
             return res.status(200).json({ user });
@@ -45,11 +45,9 @@ function handleGetUser(req, res, playerName) {
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
-}
-
-function handleUpdateUser(req, res, playerName) {
+} async function handleUpdateUser(req, res, playerName) {
     try {
-        const result = userController.updateLastActive(decodeURIComponent(playerName));
+        const result = await userController.updateLastActive(decodeURIComponent(playerName));
         return res.status(200).json({
             message: 'Atividade atualizada com sucesso',
             data: result

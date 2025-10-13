@@ -1,18 +1,52 @@
-// Simple in-memory database for Vercel serverless functions
-// This avoids native dependencies issues with better-sqlite3
+import { MongoClient } from 'mongodb';
+import { memoryUserController } from './database-memory.js';
 
-let users = [];
-let nextId = 1;
+let client = null;
+let db = null;
+let useMemoryFallback = false;
 
-// User controller functions using simple in-memory storage
+async function getDatabase() {
+    if (!client) {
+        const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017';
+
+        if (!uri || uri === 'mongodb://localhost:27017') {
+            throw new Error(`
+❌ MongoDB não configurado!
+
+Para desenvolvimento local:
+1. Instale MongoDB Community Server
+2. Configure MONGODB_URI=mongodb://localhost:27017 no .env.local
+
+Para MongoDB Atlas:
+1. Crie conta em https://cloud.mongodb.com/
+2. Configure MONGODB_URI com sua connection string
+3. Configure MONGODB_DATABASE=bragantec
+
+Arquivo .env.local deve conter:
+MONGODB_URI=mongodb://localhost:27017
+MONGODB_DATABASE=bragantec
+            `);
+        }
+
+        client = new MongoClient(uri);
+        await client.connect();
+        console.log('✅ Connected to MongoDB:', uri.includes('localhost') ? 'Local' : 'Atlas');
+    }
+
+    if (!db) {
+        db = client.db(process.env.MONGODB_DATABASE || 'bragantec');
+    }
+
+    return db;
+}
+
 export const userController = {
-    // Create or update user
-    saveUser: (userData) => {
+    saveUser: async (userData) => {
         const { playerName, playerAvatar, level, totalXp, coins, completedMissions } = userData;
 
         try {
-            // Find existing user
-            const existingIndex = users.findIndex(user => user.playerName === playerName);
+            const db = await getDatabase();
+            const collection = db.collection('users');
 
             const userRecord = {
                 playerName,
@@ -21,75 +55,85 @@ export const userController = {
                 totalXp: totalXp || 0,
                 coins: coins || 0,
                 completedMissions: completedMissions || [],
-                lastActive: new Date().toISOString(),
-                createdAt: new Date().toISOString()
+                lastActive: new Date(),
+                updatedAt: new Date()
             };
 
-            if (existingIndex >= 0) {
-                // Update existing user
-                userRecord.id = users[existingIndex].id;
-                userRecord.createdAt = users[existingIndex].createdAt;
-                users[existingIndex] = userRecord;
-                return { id: userRecord.id, success: true };
-            } else {
-                // Create new user
-                userRecord.id = nextId++;
-                users.push(userRecord);
-                return { id: userRecord.id, success: true };
-            }
+            const result = await collection.updateOne(
+                { playerName: playerName },
+                {
+                    $set: userRecord,
+                    $setOnInsert: { createdAt: new Date() }
+                },
+                { upsert: true }
+            );
+
+            return {
+                id: result.upsertedId || playerName,
+                success: true,
+                modified: result.modifiedCount > 0,
+                created: result.upsertedCount > 0
+            };
         } catch (error) {
             throw new Error(`Error saving user: ${error.message}`);
         }
     },
-
-    // Get all users
-    getAllUsers: () => {
+    getAllUsers: async () => {
         try {
-            // Sort by totalXp desc, then by level desc
-            return users
-                .slice()
-                .sort((a, b) => {
-                    if (b.totalXp !== a.totalXp) {
-                        return b.totalXp - a.totalXp;
-                    }
-                    return b.level - a.level;
-                });
+            const db = await getDatabase();
+            const collection = db.collection('users');
+
+            const users = await collection
+                .find({})
+                .sort({ totalXp: -1, level: -1 })
+                .toArray();
+
+            return users;
         } catch (error) {
             throw new Error(`Error getting users: ${error.message}`);
         }
     },
 
-    // Get specific user
-    getUser: (playerName) => {
+    getUser: async (playerName) => {
         try {
-            const user = users.find(user => user.playerName === playerName);
-            return user || null;
+            const db = await getDatabase();
+            const collection = db.collection('users');
+
+            const user = await collection.findOne({ playerName: playerName });
+            return user;
         } catch (error) {
             throw new Error(`Error getting user: ${error.message}`);
         }
     },
 
-    // Update last active
-    updateLastActive: (playerName) => {
+    updateLastActive: async (playerName) => {
         try {
-            const userIndex = users.findIndex(user => user.playerName === playerName);
-            if (userIndex >= 0) {
-                users[userIndex].lastActive = new Date().toISOString();
-                return { success: true };
-            }
-            return { success: false };
+            const db = await getDatabase();
+            const collection = db.collection('users');
+
+            const result = await collection.updateOne(
+                { playerName: playerName },
+                {
+                    $set: {
+                        lastActive: new Date(),
+                        updatedAt: new Date()
+                    }
+                }
+            );
+
+            return { success: result.modifiedCount > 0 };
         } catch (error) {
             throw new Error(`Error updating activity: ${error.message}`);
         }
     },
 
-    // Clear all data
-    clearAllData: () => {
+    clearAllData: async () => {
         try {
-            const deletedCount = users.length;
-            users.length = 0; // Clear array
-            nextId = 1; // Reset ID counter
-            return { success: true, deletedRows: deletedCount };
+            const db = await getDatabase();
+            const collection = db.collection('users');
+
+            const result = await collection.deleteMany({});
+            return { success: true, deletedRows: result.deletedCount };
         } catch (error) {
             throw new Error(`Error clearing data: ${error.message}`);
         }

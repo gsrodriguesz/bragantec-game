@@ -5,21 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:local": "vercel dev",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "node server/server.cjs",
-    "dev:full": "concurrently \"npm run server\" \"npm run dev\"",
-    "deploy": "vercel --prod",
-    "dev:vercel": "vercel dev"
+    "deploy": "vercel --prod"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.3.4",
     "@tailwindcss/vite": "^4.1.14",
-    "cors": "^2.8.5",
-    "express": "^5.1.0",
+    "mongodb": "^6.20.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.4",
@@ -30,7 +27,6 @@
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.4",
-    "concurrently": "^9.2.1",
     "eslint": "^9.36.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.22",

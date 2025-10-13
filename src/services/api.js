@@ -29,9 +29,7 @@ const apiRequest = async (endpoint, options = {}) => {
     }
 };
 
-// Funções específicas para usuários
 export const userAPI = {
-    // Salvar/atualizar usuário
     saveUser: async (userData) => {
         return apiRequest('/users', {
             method: 'POST',
@@ -39,24 +37,20 @@ export const userAPI = {
         });
     },
 
-    // Buscar todos os usuários
     getAllUsers: async () => {
         return apiRequest('/users');
     },
 
-    // Buscar usuário específico
     getUser: async (playerName) => {
         return apiRequest(`/users/${encodeURIComponent(playerName)}`);
     },
 
-    // Atualizar última atividade
     updateActivity: async (playerName) => {
         return apiRequest(`/users/${encodeURIComponent(playerName)}/activity`, {
             method: 'PUT'
         });
     },
 
-    // Limpar todos os dados (admin)
     clearAllData: async () => {
         return apiRequest('/users', {
             method: 'DELETE'

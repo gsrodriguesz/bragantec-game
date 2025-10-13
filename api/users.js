@@ -1,13 +1,10 @@
-// Users endpoint - handles all user operations
 import { userController } from './database.js';
 
-export default function handler(req, res) {
-    // Enable CORS
+export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    // Handle preflight requests
     if (req.method === 'OPTIONS') {
         return res.status(200).end();
     }
@@ -15,11 +12,11 @@ export default function handler(req, res) {
     try {
         switch (req.method) {
             case 'GET':
-                return handleGetUsers(req, res);
+                return await handleGetUsers(req, res);
             case 'POST':
-                return handleCreateUser(req, res);
+                return await handleCreateUser(req, res);
             case 'DELETE':
-                return handleDeleteAllUsers(req, res);
+                return await handleDeleteAllUsers(req, res);
             default:
                 return res.status(405).json({ error: 'Method not allowed' });
         }
@@ -29,9 +26,9 @@ export default function handler(req, res) {
     }
 }
 
-function handleGetUsers(req, res) {
+async function handleGetUsers(req, res) {
     try {
-        const users = userController.getAllUsers();
+        const users = await userController.getAllUsers();
         return res.status(200).json({
             users: users,
             total: users.length
@@ -41,7 +38,7 @@ function handleGetUsers(req, res) {
     }
 }
 
-function handleCreateUser(req, res) {
+async function handleCreateUser(req, res) {
     const { playerName, playerAvatar, level, totalXp, coins, completedMissions } = req.body;
 
     if (!playerName || !playerAvatar) {
@@ -51,7 +48,7 @@ function handleCreateUser(req, res) {
     }
 
     try {
-        const result = userController.saveUser({
+        const result = await userController.saveUser({
             playerName,
             playerAvatar,
             level,
@@ -69,9 +66,9 @@ function handleCreateUser(req, res) {
     }
 }
 
-function handleDeleteAllUsers(req, res) {
+async function handleDeleteAllUsers(req, res) {
     try {
-        const result = userController.clearAllData();
+        const result = await userController.clearAllData();
         return res.status(200).json({
             message: 'Todos os dados foram removidos',
             data: result
