@@ -27,7 +27,7 @@ function App() {
               <Route path="/curso" element={<Curso />} />
               <Route path="/scratch" element={<Scratch />} />
             </Routes>
-            {/* <Footer /> */}
+            <Footer />
           </>
         } />
       </Routes>
