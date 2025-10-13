@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=BBH+Sans+Bartle&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+.containerMaior {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.containerMaior:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.containerEsquerdo {
+    flex: 3;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+}
+
+.containerDireito {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+}
+
+.titulo {
+    margin: 0 0 16px 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.2;
+    font-family: "BBH Sans Bartle", sans-serif;
+}
+
+.descricao {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #4a5568;
+    margin-bottom: 20px;
+}
+
+.integrantes {
+    font-size: 0.9rem;
+    color: #718096;
+    font-style: italic;
+    margin: 0;
+}
+
+.imagem {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal styles */
+.modalDescription {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #4a5568;
+    margin-bottom: 24px;
+}
+
+.tecnologias {
+    margin-bottom: 24px;
+}
+
+.tecnologias h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.1rem;
+    color: #2d3748;
+}
+
+.tecnologiasList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tecnologiaTag {
+    background: #e2e8f0;
+    color: #2d3748;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.integrantesSection {
+    margin-bottom: 24px;
+}
+
+.integrantesSection h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    color: #2d3748;
+}
+
+.integrantesSection p {
+    margin: 0;
+    color: #4a5568;
+}
+
+.imagensSection h3 {
+    margin: 0 0 16px 0;
+    font-size: 1.1rem;
+    color: #2d3748;
+}
+
+.imageGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.modalImage {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}

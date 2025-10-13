@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=BBH+Sans+Bartle&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+header{
+    display: flex;
+    height: 60px;
+    background-color: #22223b;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.links{
+    justify-content: space-around;
+}
+
+.titulo{
+    font-size: larger;
+    color: white;
+    font-family: "BBH Sans Bartle", sans-serif;
+}
+
+.link{
+    margin-left: 30px;
+    color: white;
+
+}
