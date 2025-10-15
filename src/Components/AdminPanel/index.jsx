@@ -251,8 +251,8 @@ export function AdminPanel() {
         return (
             <div className={styles.authContainer}>
                 <div className={styles.authCard}>
-                    <h2>🔐 Painel Administrativo</h2>
-                    <p>Digite a senha para acessar o painel de usuários:</p>
+                    <h2>🔐 Gestor de Usuários</h2>
+                    <p>Digite a senha para acessar o gestor de usuários:</p>
                     <form onSubmit={handleAuth}>
                         <input
                             type="password"
@@ -274,7 +274,7 @@ export function AdminPanel() {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <h1>👮‍♂️ Painel Administrativo</h1>
+                <h1>👮‍♂️ Gestor de Usuários</h1>
                 <p>Gerencie e visualize os dados dos usuários do sistema de gamificação</p>
                 <div className={styles.dataSource}>
                     {showSimulatedData ? (
