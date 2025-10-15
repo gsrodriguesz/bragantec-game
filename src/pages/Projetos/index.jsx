@@ -4,6 +4,9 @@ import { ItemProjeto } from "../../Components/ItemProjeto";
 import styles from "./Projetos.module.css";
 
 
+import flappy from "../../assets/img/flappy.png";
+
+
 // Dinhero imports
 import dinhero_logo from "../../assets/img/dinhero/logo.png";
 import dinhero_0 from "../../assets/img/dinhero/0.png";
@@ -13,6 +16,12 @@ import dinhero_3 from "../../assets/img/dinhero/3.png";
 import dinhero_4 from "../../assets/img/dinhero/4.png";
 import dinhero_5 from "../../assets/img/dinhero/5.png";
 import dinhero_6 from "../../assets/img/dinhero/6.png";
+
+// Beesaver imports
+import beesaver_logo from "../../assets/img/beesaver/logo.png";
+import beesaver_0 from "../../assets/img/beesaver/0.png";
+import beesaver_1 from "../../assets/img/beesaver/1.png";
+import beesaver_2 from "../../assets/img/beesaver/2.png";
 
 
 
@@ -38,6 +47,15 @@ export function Projetos() {
             tecnologias: ["React", "Node.js", "MongoDB", "Express", "JWT"],
             linkExterno: "https://dinhero.vercel.app",
             textoBotao: "🌐 Acessar DinHero"
+        },
+        {
+            titulo: "BeeSaver",
+            nomesDosIntegrantes: "Karoline Manole Andrade Sena, Laura Martins Valentim, Mariana Leite Barbosa, Pedro Henrique Borges de Oliveira",
+            descricao: "Projeto visa facilitar esforços comunitários para o crescimento da população de abelhas",
+            descricaoCompleta: "Este projeto apresenta como proposta contribuir para o aumento da população de abelhas em nossa comunidade no município de Bragança Paulista. Elas são reconhecidas como fundamentais para a biodiversidade e para a segurança alimentar global, são consideradas essenciais para a manutenção da vida em nosso planeta. Pretende-se criar um aplicativo informativo para a administração do cultivo de flores e diferentes vegetações, auxiliando o usuário para a realização de melhores práticas de cultivo, visando o aumento populacional das diferentes espécies de abelhas. O aplicativo também pretende propor ao usuário, participar da construção de um mapa colaborativo sobre a incidência e densidade de abelhas. Para desenvolvimento visual do aplicativo será usada a ferramenta FlutterFlow que permite criar softwares móveis usando o framework Flutter do Google. Espera-se colaborar com a conscientização sobre a importância das abelhas para os ecossistemas e a manutenção da vida no planeta Terra.",
+            caminhoImagem: beesaver_logo,
+            imagens: [beesaver_logo, beesaver_0, beesaver_1, beesaver_2],
+            tecnologias: ["Sem informação"],
         }
     ];
 
