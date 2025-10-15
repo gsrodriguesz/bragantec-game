@@ -9,7 +9,9 @@ export function ItemProjeto({
     caminhoImagem,
     descricaoCompleta = descricao,
     imagens = [caminhoImagem],
-    tecnologias = []
+    tecnologias = [],
+    linkExterno = null,
+    textoBotao = "Visitar Projeto"
 }) {
     const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -66,16 +68,30 @@ export function ItemProjeto({
                     {imagens.length > 0 && (
                         <div className={styles.imagensSection}>
                             <h3>Galeria do projeto:</h3>
-                            <div className={styles.imageGrid}>
+                            <div className={styles.pinterestGrid}>
                                 {imagens.map((img, index) => (
-                                    <img
-                                        key={index}
-                                        src={img}
-                                        alt={`${titulo} - imagem ${index + 1}`}
-                                        className={styles.modalImage}
-                                    />
+                                    <div key={index} className={styles.pinterestItem}>
+                                        <img
+                                            src={img}
+                                            alt={`${titulo} - imagem ${index + 1}`}
+                                            className={styles.modalImage}
+                                        />
+                                    </div>
                                 ))}
                             </div>
+                        </div>
+                    )}
+
+                    {linkExterno && (
+                        <div className={styles.botaoSection}>
+                            <a
+                                href={linkExterno}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.botaoExterno}
+                            >
+                                {textoBotao}
+                            </a>
                         </div>
                     )}
                 </ModalBody>

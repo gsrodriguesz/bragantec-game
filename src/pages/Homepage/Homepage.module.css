@@ -187,6 +187,11 @@
     line-height: 1.6;
 }
 
+.formSection {
+    flex: 2;
+    width: 30vw;
+}
+
 .nameInput {
     width: 60%;
     padding: 15px 20px;

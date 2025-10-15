@@ -87,7 +87,7 @@ export function Homepage() {
                                 <h2>Olá, jovem explorador!</h2>
                                 <p>Eu sou o Byte! Vamos criar seu perfil para esta aventura!</p>
                             </div>
-                            <div>
+                            <div className={styles.formSection}>
                                 <form onSubmit={handleProfileSubmit}>
                                     <div className={styles.inputSection}>
                                         <label className={styles.inputLabel}>Seu nome:</label>

@@ -35,7 +35,9 @@ export function Projetos() {
             descricaoCompleta: "DinHero é uma plataforma educacional inovadora que transforma o aprendizado sobre educação financeira em uma experiência gamificada e personalizada. O projeto oferece trilhas de estudo adaptáveis ao perfil de cada usuário, desde iniciantes até pessoas com conhecimento avançado em finanças. Através de módulos interativos, quizzes e simuladores, os usuários aprendem conceitos fundamentais como orçamento pessoal, investimentos, controle de gastos e planejamento financeiro a longo prazo. A plataforma também inclui ferramentas práticas para acompanhamento de metas financeiras e calculadoras especializadas.",
             caminhoImagem: dinhero_logo,
             imagens: [dinhero_logo, dinhero_0, dinhero_1, dinhero_2, dinhero_3, dinhero_4, dinhero_5, dinhero_6],
-            tecnologias: ["React", "Node.js", "MongoDB", "Express", "JWT"]
+            tecnologias: ["React", "Node.js", "MongoDB", "Express", "JWT"],
+            linkExterno: "https://dinhero.vercel.app",
+            textoBotao: "🌐 Acessar DinHero"
         }
     ];
 
@@ -62,6 +64,8 @@ export function Projetos() {
                             caminhoImagem={projeto.caminhoImagem}
                             imagens={projeto.imagens}
                             tecnologias={projeto.tecnologias}
+                            linkExterno={projeto.linkExterno}
+                            textoBotao={projeto.textoBotao}
                         />
                     </div>
                 ))}

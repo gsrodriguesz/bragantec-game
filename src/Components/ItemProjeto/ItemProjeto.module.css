@@ -77,6 +77,10 @@
 
 .tecnologias {
     margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .tecnologias h3 {
@@ -121,16 +125,92 @@
     color: #2d3748;
 }
 
-.imageGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
+/* Layout tipo Pinterest para as imagens */
+.pinterestGrid {
+    column-count: 3;
+    column-gap: 16px;
+    column-fill: balance;
+}
+
+.pinterestItem {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 16px;
+    break-inside: avoid;
+    page-break-inside: avoid;
 }
 
 .modalImage {
     width: 100%;
-    height: 150px;
+    height: auto;
     object-fit: cover;
     border-radius: 8px;
     border: 1px solid #e2e8f0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modalImage:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsividade do grid Pinterest */
+@media (max-width: 768px) {
+    .pinterestGrid {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 480px) {
+    .pinterestGrid {
+        column-count: 1;
+    }
+}
+
+/* Botão de redirecionamento externo */
+.botaoSection {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    padding-top: 24px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.botaoExterno {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.botaoExterno::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.botaoExterno:hover::before {
+    left: 100%;
+}
+
+.botaoExterno:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.botaoExterno:active {
+    transform: translateY(0);
 }
