@@ -1,9 +1,7 @@
-// Configuração da API
 const API_BASE_URL = process.env.NODE_ENV === 'production'
-    ? '/api'  // Vercel serverless functions
-    : 'http://localhost:3001/api';  // Local development
+    ? '/api' 
+    : 'http://localhost:3001/api'; 
 
-// Função utilitária para fazer requisições
 const apiRequest = async (endpoint, options = {}) => {
     try {
         const url = `${API_BASE_URL}${endpoint}`;
@@ -57,13 +55,11 @@ export const userAPI = {
         });
     },
 
-    // Verificar saúde da API
     healthCheck: async () => {
         return apiRequest('/health');
     }
 };
 
-// Função para verificar se a API está disponível
 export const checkAPIAvailable = async () => {
     try {
         await userAPI.healthCheck();

@@ -12,11 +12,9 @@ export function AdminPanel() {
     const [showSimulatedData, setShowSimulatedData] = useState(false);
     const [apiAvailable, setApiAvailable] = useState(false);
 
-    // Senha simples para acesso admin (em produção seria mais seguro)
-    const ADMIN_PASSWORD = 'bragantec2025';
+    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD
 
     useEffect(() => {
-        // Verificar disponibilidade da API
         checkAPIAvailable().then(available => {
             setApiAvailable(available);
         });
@@ -28,7 +26,6 @@ export function AdminPanel() {
         }
     }, [isAuthenticated, showSimulatedData, apiAvailable]);
 
-    // Gerador de dados simulados realistas
     const generateSimulatedUsers = () => {
         const nomes = [
             'Ana Silva', 'Pedro Santos', 'Maria Costa', 'João Oliveira', 'Carla Ferreira',
@@ -61,13 +58,12 @@ export function AdminPanel() {
             const randomXP = randomLevel * 300 + Math.floor(Math.random() * 250);
             const randomCoins = Math.floor(randomXP * 0.2) + Math.floor(Math.random() * 50);
 
-            // Simular atividade mais recente para alguns usuários
             const activityVariations = [
-                Math.floor(Math.random() * 3600000), // Últimas 1 hora
-                Math.floor(Math.random() * 86400000), // Últimas 24 horas
-                Math.floor(Math.random() * 172800000), // Últimos 2 dias
-                Math.floor(Math.random() * 604800000), // Última semana
-                Math.floor(Math.random() * 2592000000) // Último mês
+                Math.floor(Math.random() * 3600000),
+                Math.floor(Math.random() * 86400000),
+                Math.floor(Math.random() * 172800000),
+                Math.floor(Math.random() * 604800000),
+                Math.floor(Math.random() * 2592000000)
             ];
 
             const missionsCount = Math.min(randomLevel, 5);
@@ -90,11 +86,10 @@ export function AdminPanel() {
                 visitedPages,
                 unlockedBadges: [],
                 lastActive: new Date(Date.now() - activityVariations[index % activityVariations.length]).toISOString(),
-                // Dados extras para simulação
                 escola: escolas[index % escolas.length],
                 dispositivo: dispositivos[index % dispositivos.length],
                 sessoes: Math.floor(Math.random() * 20) + 1,
-                tempoTotal: Math.floor(Math.random() * 7200) + 300 // 5min a 2h em segundos
+                tempoTotal: Math.floor(Math.random() * 7200) + 300
             };
         });
     };
@@ -103,10 +98,8 @@ export function AdminPanel() {
         let usersArray = [];
 
         if (showSimulatedData) {
-            // Mostrar dados simulados
             usersArray = generateSimulatedUsers();
         } else if (apiAvailable) {
-            // Buscar dados reais da API
             try {
                 const response = await userAPI.getAllUsers();
                 usersArray = response.users.map(user => ({
@@ -117,12 +110,10 @@ export function AdminPanel() {
                 console.log(`📊 ${usersArray.length} usuários carregados da API`);
             } catch (error) {
                 console.error('Erro ao carregar usuários da API:', error);
-                // Fallback para localStorage
                 loadUsersFromLocalStorage();
                 return;
             }
         } else {
-            // Fallback: dados do localStorage
             loadUsersFromLocalStorage();
             return;
         }
@@ -230,7 +221,6 @@ export function AdminPanel() {
 
     const clearAllData = async () => {
         if (window.confirm('Tem certeza que deseja limpar todos os dados? Esta ação não pode ser desfeita.')) {
-            // Limpar dados da API se disponível
             if (apiAvailable) {
                 try {
                     await userAPI.clearAllData();
@@ -240,7 +230,6 @@ export function AdminPanel() {
                 }
             }
 
-            // Limpar dados locais
             localStorage.removeItem('bragantec-all-users');
             localStorage.removeItem('bragantec-game');
             setUsers([]);

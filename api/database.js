@@ -4,7 +4,6 @@ let client = null;
 let db = null;
 let useMemoryFallback = false;
 
-// In-memory fallback storage
 let memoryUsers = [];
 let nextId = 1;
 
@@ -78,7 +77,7 @@ const memoryUserController = {
 
 async function getDatabase() {
     if (useMemoryFallback) {
-        return null; // Indica que deve usar memory fallback
+        return null;
     }
 
     if (!client) {
@@ -113,7 +112,6 @@ export const userController = {
         try {
             const db = await getDatabase();
 
-            // Use memory fallback if MongoDB not available
             if (!db) {
                 return await memoryUserController.saveUser(userData);
             }
@@ -155,7 +153,6 @@ export const userController = {
         try {
             const db = await getDatabase();
 
-            // Use memory fallback if MongoDB not available
             if (!db) {
                 return await memoryUserController.getAllUsers();
             }
@@ -176,7 +173,6 @@ export const userController = {
         try {
             const db = await getDatabase();
 
-            // Use memory fallback if MongoDB not available
             if (!db) {
                 return await memoryUserController.getUser(playerName);
             }
@@ -193,7 +189,6 @@ export const userController = {
         try {
             const db = await getDatabase();
 
-            // Use memory fallback if MongoDB not available
             if (!db) {
                 return await memoryUserController.updateLastActive(playerName);
             }
@@ -219,7 +214,6 @@ export const userController = {
         try {
             const db = await getDatabase();
 
-            // Use memory fallback if MongoDB not available
             if (!db) {
                 return await memoryUserController.clearAllData();
             }

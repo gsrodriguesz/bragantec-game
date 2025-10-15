@@ -18,7 +18,6 @@ export function Homepage() {
     useEffect(() => {
         visitPage('homepage');
 
-        // Se é a primeira visita, pedir o nome
         if (!gameState.playerName && !showNameInput) {
             setTimeout(() => setShowNameInput(true), 1000);
         }

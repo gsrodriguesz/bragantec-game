@@ -80,7 +80,6 @@ export function GameProvider({ children }) {
         { id: 'level_5', name: 'Nível 5', icon: '⭐', description: 'Chegou ao nível 5' }
     ];
 
-    // Verificar disponibilidade da API ao carregar
     useEffect(() => {
         checkAPIAvailable().then(available => {
             setApiAvailable(available);
@@ -92,23 +91,18 @@ export function GameProvider({ children }) {
         });
     }, []);
 
-    // Salvar dados sempre que o estado mudar
     useEffect(() => {
-        // Sempre salvar no localStorage (backup)
         localStorage.setItem('bragantec-game', JSON.stringify(gameState));
 
-        // Se API estiver disponível e player tiver nome, salvar no banco
         if (apiAvailable && gameState.playerName) {
             saveToDatabase(gameState);
         }
 
-        // Salvar na lista local para compatibilidade
         if (gameState.playerName) {
             saveToAllUsers(gameState);
         }
     }, [gameState, apiAvailable]);
 
-    // Função para salvar no banco de dados via API
     const saveToDatabase = async (currentGameState) => {
         try {
             await userAPI.saveUser({
@@ -122,7 +116,6 @@ export function GameProvider({ children }) {
             console.log('💾 Dados salvos no banco de dados');
         } catch (error) {
             console.error('Erro ao salvar no banco:', error);
-            // Se falhar, marcar API como indisponível
             setApiAvailable(false);
         }
     };
@@ -131,7 +124,6 @@ export function GameProvider({ children }) {
         const allUsersData = localStorage.getItem('bragantec-all-users');
         let allUsers = allUsersData ? JSON.parse(allUsersData) : [];
 
-        // Encontrar usuário existente ou criar novo
         const existingUserIndex = allUsers.findIndex(user =>
             user.playerName === currentGameState.playerName &&
             user.playerAvatar === currentGameState.playerAvatar
@@ -156,7 +148,7 @@ export function GameProvider({ children }) {
         setGameState(prev => {
             const newXp = prev.xp + amount;
             const newTotalXp = prev.totalXp + amount;
-            const newLevel = Math.floor(newTotalXp / 300) + 1; // Cada 300 XP = 1 level
+            const newLevel = Math.floor(newTotalXp / 300) + 1;
 
             return {
                 ...prev,
@@ -181,7 +173,6 @@ export function GameProvider({ children }) {
                 ? prev.visitedPages
                 : [...prev.visitedPages, pageName];
 
-            // Verificar missões
             const updatedMissions = [...prev.completedMissions];
             let xpGained = 0;
             let coinsGained = 0;
@@ -254,12 +245,10 @@ export function GameProvider({ children }) {
     };
 
     const setPlayerProfile = async (name, avatar) => {
-        // Se API estiver disponível, tentar buscar dados existentes
         if (apiAvailable) {
             try {
                 const response = await userAPI.getUser(name);
                 if (response.user) {
-                    // Usuário já existe no banco, carregar seus dados
                     setGameState(prev => ({
                         ...prev,
                         playerName: response.user.playerName,
@@ -277,7 +266,6 @@ export function GameProvider({ children }) {
             }
         }
 
-        // Criar novo perfil ou usar dados locais
         setGameState(prev => ({
             ...prev,
             playerName: name,

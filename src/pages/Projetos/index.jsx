@@ -24,7 +24,7 @@ export function Projetos() {
     }, []);
 
     const handleProjectClick = () => {
-        addXP(25); // Bonus XP por abrir detalhes do projeto
+        addXP(25);
     };
 
     const projetos = [
