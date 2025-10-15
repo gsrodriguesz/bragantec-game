@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react';
 import styles from './AdminPanel.module.css';
 import { userAPI, checkAPIAvailable } from '../../services/api';
 
+
 export function AdminPanel() {
+    const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD
+
     const [users, setUsers] = useState([]);
     const [sortBy, setSortBy] = useState('totalXp');
     const [sortOrder, setSortOrder] = useState('desc');
@@ -12,7 +15,6 @@ export function AdminPanel() {
     const [showSimulatedData, setShowSimulatedData] = useState(false);
     const [apiAvailable, setApiAvailable] = useState(false);
 
-    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD
 
     useEffect(() => {
         checkAPIAvailable().then(available => {
