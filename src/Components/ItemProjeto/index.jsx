@@ -31,13 +31,15 @@ export function ItemProjeto({
                     <p className={styles.descricao}>{descricao}</p>
                     <p className={styles.integrantes}>Por: {nomesDosIntegrantes}</p>
                 </div>
-                <div className={styles.containerDireito}>
-                    <img
-                        src={caminhoImagem}
-                        alt={titulo}
-                        className={styles.imagem}
-                    />
-                </div>
+                {caminhoImagem && (
+                    <div className={styles.containerDireito}>
+                        <img
+                            src={caminhoImagem}
+                            alt={titulo}
+                            className={styles.imagem}
+                        />
+                    </div>
+                )}
             </div>
 
             <Modal isOpen={isModalOpen} onClose={handleCloseModal}>

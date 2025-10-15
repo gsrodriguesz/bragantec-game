@@ -23,6 +23,14 @@ import beesaver_0 from "../../assets/img/beesaver/0.png";
 import beesaver_1 from "../../assets/img/beesaver/1.png";
 import beesaver_2 from "../../assets/img/beesaver/2.png";
 
+// Parla imports
+import parla_logo from "../../assets/img/parla/logo.jpg";
+
+// Petag imports
+import petag_logo from "../../assets/img/petag/logo.png";
+import petag_0 from "../../assets/img/petag/0.jpg";
+import petag_1 from "../../assets/img/petag/1.jpg";
+import petag_2 from "../../assets/img/petag/2.jpg";
 
 
 export function Projetos() {
@@ -56,6 +64,38 @@ export function Projetos() {
             caminhoImagem: beesaver_logo,
             imagens: [beesaver_logo, beesaver_0, beesaver_1, beesaver_2],
             tecnologias: ["Sem informação"],
+        },
+        {
+            titulo: "Parla",
+            nomesDosIntegrantes: "Bruna Camargo Galindo, Fernanda Nascimento de Paula",
+            descricao: "Plataforma para auxiliar no aprendizado de deficientes auditivos e surdos na oralização e na leitura labial - Fase II",
+            descricaoCompleta: "O projeto Parla tem como objetivo desenvolver uma plataforma digital voltada ao auxílio no processo de oralização e no aprendizado da leitura labial de pessoas surdas e com deficiência auditiva severa ou profunda. A iniciativa busca promover inclusão social e educacional, contribuindo para a comunicação entre o público surdo e o mundo ouvinte, alinhando-se aos Objetivos de Desenvolvimento Sustentável (ODS) 3, 4 e 10 da ONU — Saúde e Bem-Estar, Educação de Qualidade e Redução das Desigualdades. A plataforma utiliza inteligência artificial para reconhecer sons da fala e recursos visuais, como GIFs animados, que demonstram detalhadamente os movimentos faciais e labiais de cada fonema, facilitando o aprendizado interativo e autônomo. O desenvolvimento do Parla ocorre em fases, com base em tecnologias como HTML, CSS, JavaScript e MySQL , e conta com o apoio técnico do Prof. Dr. Rafael Prearo Lima (orientador) e da Profa. Me. Talita de P. C. de Souza (coorientadora).",
+            caminhoImagem: parla_logo,
+            imagens: [parla_logo],
+            tecnologias: ["Sem informação"],
+        },
+        {
+            titulo: "PeTAG",
+            nomesDosIntegrantes: "Everton Oliveira, Julia Chrinstina, Lucas Julião, Wagner Kiota",
+            descricao: "Aplicativo de cerca virtual para pets",
+            descricaoCompleta: "Nosso aplicativo permite criar uma cerca virtual em qualquer local, definindo a área segura para o seu pet. As coleiras conectadas enviam constantemente a localização do animal para o app, que monitora se ele está dentro da área permitida. Caso o pet ultrapasse os limites da cerca, o tutor recebe imediatamente uma notificação e passa a poder rastreá-lo, garantindo mais segurança e tranquilidade ao acompanhar o paradeiro do seu animal de estimação.",
+            caminhoImagem: petag_logo,
+            imagens: [petag_logo, petag_0, petag_1, petag_2],
+            tecnologias: ['Python', 'JavaScript', 'HTML', 'CSS', 'SQLite', 'React', 'Vite', 'Flask'],
+        },
+        {
+            titulo: "MonitorIF",
+            nomesDosIntegrantes: "Julio César Pinto de Souza, Gustavo Barbosa de Pieri, Guilherme Salles Leite",
+            descricao: "Site para organizar os encontros de monitoria acadêmica",
+            descricaoCompleta: "site para organizar os encontros de monitoria acadêmica em escolas de âmbito federal, buscando otimizar o aproveitamento do tempo e melhorar a comunicação entre monitores e estudantes. A proposta visa resolver um problema recorrente na gestão dessas monitorias, que ainda ocorre de forma informal e desorganizada, comprometendo a eficácia do apoio pedagógico oferecido aos alunos.",
+            tecnologias: ['Python', 'JavaScript', 'HTML', 'CSS', 'SQL'],
+        },
+        {
+            titulo: "Caminho Leve MC",
+            nomesDosIntegrantes: "Emanuelly Arantes de Oliveira",
+            descricao: "Plataforma de Apoio e Informação sobre a Miastenia Congênita",
+            descricaoCompleta: "A Miastenia Congênita (MC) é uma doença neuromuscular genética rara e pouco conhecida do público em geral. Este projeto tem como objetivo o desenvolvimento de uma plataforma digital acessível voltada ao apoio e à informação sobre. Devido à escassez de dados acessíveis e ao alto índice de diagnósticos tardios, muitos pacientes enfrentam preconceito, desinformação e isolamento social. A proposta da plataforma “Caminho Leve MC” é oferecer um espaço acolhedor, no qual pacientes, familiares e profissionais possam compartilhar informações, experiências e apoio emocional. A iniciativa se baseia em vivências pessoais da autora e utiliza a pesquisa bibliográfica e exploratória. O projeto será desenvolvido usando metodologias da engenharia de software, como análise e levantamento de requisitos, de sistemas similares correlatos e desenvolvimento de protótipo funcional. Espera-se que o projeto apresente de forma clara e fácil as informações para as pessoas, os familiares e o público em geral, além de oferecer um canal de afeto e troca de informações entre os usuários.",
+            tecnologias: ['Sem informação'],
         }
     ];
 
