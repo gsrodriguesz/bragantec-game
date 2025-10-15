@@ -68,7 +68,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, #667eea, #764ba2);
     z-index: -1;
     margin: -3px;
     border-radius: 25px;
@@ -76,7 +75,9 @@
 
 .optionCard:hover {
     transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease;
+    border: 3px solid white;
+    background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
 .cardIcon {
@@ -90,6 +91,9 @@
     margin-bottom: 15px;
     color: #667eea;
     font-weight: bold;
+}
+.optionCard:hover h2, .optionCard:hover p {
+    color: white;
 }
 
 .optionCard p {
@@ -124,7 +128,7 @@
 
 .achievement h3 {
     font-size: 1.5em;
-    margin-bottom: 10px;
+    margin-top: 0;
 }
 
 .achievement p {
