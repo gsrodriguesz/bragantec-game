@@ -80,62 +80,69 @@ export function Homepage() {
             {/* Modal para criar perfil */}
             {showNameInput && (
                 <div className={styles.nameModal}>
-                    <div className={styles.nameContent}>
-                        <div className={styles.mascotWelcome}>🤖</div>
-                        <h2>Olá, jovem explorador!</h2>
-                        <p>Eu sou o Byte! Vamos criar seu perfil para esta aventura!</p>
+                    <div className={styles.modalContainer}>
+                        <div className={styles.nameContent}>
+                            <div>
+                                <div className={styles.mascotWelcome}>🤖</div>
+                                <h2>Olá, jovem explorador!</h2>
+                                <p>Eu sou o Byte! Vamos criar seu perfil para esta aventura!</p>
+                            </div>
+                            <div>
+                                <form onSubmit={handleProfileSubmit}>
+                                    <div className={styles.inputSection}>
+                                        <label className={styles.inputLabel}>Seu nome:</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Digite seu nome..."
+                                            value={tempName}
+                                            onChange={(e) => setTempName(e.target.value)}
+                                            className={styles.nameInput}
+                                            autoFocus
+                                            maxLength={20}
+                                        />
+                                    </div>
 
-                        <form onSubmit={handleProfileSubmit}>
-                            <div className={styles.inputSection}>
-                                <label className={styles.inputLabel}>Seu nome:</label>
-                                <input
-                                    type="text"
-                                    placeholder="Digite seu nome..."
-                                    value={tempName}
-                                    onChange={(e) => setTempName(e.target.value)}
-                                    className={styles.nameInput}
-                                    autoFocus
-                                    maxLength={20}
-                                />
+                                    <div className={styles.avatarSection}>
+                                        <label className={styles.inputLabel}>Escolha seu avatar:</label>
+                                        <div className={styles.avatarGrid}>
+                                            {availableAvatars.map((avatar, index) => (
+                                                <button
+                                                    key={index}
+                                                    type="button"
+                                                    className={`${styles.avatarOption} ${selectedAvatar === avatar ? styles.selected : ''}`}
+                                                    onClick={() => setSelectedAvatar(avatar)}
+                                                >
+                                                    {avatar}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className={styles.previewSection}>
+                                        <p className={styles.previewLabel}>Preview:</p>
+                                        <div className={styles.previewCard}>
+                                            <div className={styles.previewAvatar}>{selectedAvatar}</div>
+                                            <span className={styles.previewName}>
+                                                {tempName || 'Seu nome'}
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                    <button type="submit" className={styles.nameSubmit}>
+                                        Começar Aventura! 🚀
+                                    </button>
+                                </form>
+                                <button
+                                    className={styles.skipButton}
+                                    onClick={() => setShowNameInput(false)}
+                                >
+                                    Pular
+                                </button>
                             </div>
 
-                            <div className={styles.avatarSection}>
-                                <label className={styles.inputLabel}>Escolha seu avatar:</label>
-                                <div className={styles.avatarGrid}>
-                                    {availableAvatars.map((avatar, index) => (
-                                        <button
-                                            key={index}
-                                            type="button"
-                                            className={`${styles.avatarOption} ${selectedAvatar === avatar ? styles.selected : ''}`}
-                                            onClick={() => setSelectedAvatar(avatar)}
-                                        >
-                                            {avatar}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
 
-                            <div className={styles.previewSection}>
-                                <p className={styles.previewLabel}>Preview:</p>
-                                <div className={styles.previewCard}>
-                                    <div className={styles.previewAvatar}>{selectedAvatar}</div>
-                                    <span className={styles.previewName}>
-                                        {tempName || 'Seu nome'}
-                                    </span>
-                                </div>
-                            </div>
-
-                            <button type="submit" className={styles.nameSubmit}>
-                                Começar Aventura! 🚀
-                            </button>
-                        </form>
-
-                        <button
-                            className={styles.skipButton}
-                            onClick={() => setShowNameInput(false)}
-                        >
-                            Pular
-                        </button>
+                        </div>
                     </div>
                 </div>
             )}
