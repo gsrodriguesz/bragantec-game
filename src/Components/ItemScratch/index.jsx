@@ -14,7 +14,7 @@ export function ItemScratch({ titulo, descricao, link, caminhoImagem }) {
                     <h2 className={styles.titulo}>{titulo}</h2>
                     <p className={styles.descricao}>{descricao}</p>
                 </div>
-                {caminhoImagem && (
+                {/* {caminhoImagem && (
                     <div className={styles.containerDireito}>
                         <img
                             src={caminhoImagem}
@@ -22,7 +22,7 @@ export function ItemScratch({ titulo, descricao, link, caminhoImagem }) {
                             className={styles.imagem}
                         />
                     </div>
-                )}
+                )} */}
             </div>
         </a>
     );
