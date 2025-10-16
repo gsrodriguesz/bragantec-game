@@ -82,7 +82,7 @@ export function Projetos() {
         },
         {
             titulo: "PeTAG",
-            nomesDosIntegrantes: "Everton Oliveira, Julia Chrinstina, Lucas Julião, Wagner Kiota",
+            nomesDosIntegrantes: "Everton Oliveira, Julia Christina, Lucas Julião, Wagner Kiota",
             descricao: "Aplicativo de cerca virtual para pets",
             descricaoCompleta: "Nosso aplicativo permite criar uma cerca virtual em qualquer local, definindo a área segura para o seu pet. As coleiras conectadas enviam constantemente a localização do animal para o app, que monitora se ele está dentro da área permitida. Caso o pet ultrapasse os limites da cerca, o tutor recebe imediatamente uma notificação e passa a poder rastreá-lo, garantindo mais segurança e tranquilidade ao acompanhar o paradeiro do seu animal de estimação.",
             caminhoImagem: petag_logo,

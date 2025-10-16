@@ -2,6 +2,10 @@ import { useEffect } from "react";
 import { useGame } from "../../Components/GameSystem";
 import styles from "./Curso.module.css";
 
+
+import image_db from "../../assets/img/bdd.jpg"
+import image_python from "../../assets/img/python.png"
+
 export function Curso() {
     const { visitPage, gameState } = useGame();
 
@@ -29,6 +33,17 @@ export function Curso() {
                 <div className={styles.infoCard}>
                     <h2>💻 O que você vai aprender</h2>
                     <ul>
+                        <li>Lógica de programação</li>
+                        <p>Aprendemos a pensar como programadores, vendo o básico da programação. Vemos o que é algoritmo e como construir um, além de conceitos fundamentais como variáveis, estruturas de decisão e repetição, etc. Essa base é essencial para que os alunos entendam outras linguagens de programação que venham a aprender.</p>
+                        <p>Algoritmo = receita, lista de passos do que fazer. <br />Linguagem de programação = é a língua que você vai escrever o seu algoritmo.</p>
+
+                        <li>Linguagem técnica</li>
+                        <p>É aqui que vemos as linguagens de programação, em que começamos aprendendo a programar o básico com ela e gradualmente nos aprofundando. Ex.: C#, Python, Java.</p>
+                        <img src={image_python} alt="Python" />
+
+                        <li>Programação Web</li>
+                        <p>Os alunos aprendem a criar sites e aplicações para a internet. Na matéria, são estudadas linguagens de programação web (HTML, CSS, JavaScript, JSX) que formam a base de qualquer página web. Vemos também estruturação de conteúdo, design responsivo (para sites funcionarem bem em celulares e computadores) e interatividade com o usuário (tipo fazer alguma ação quando o usuário clicar em algum botão).</p>
+
                         <li>PJI - Projeto Integrador</li>
                         <p>A matéria de projeto integrador tem como objetivo realizar a integração entre vários
                             componentes curriculares do curso</p>
@@ -53,6 +68,7 @@ export function Curso() {
                         <p>Dessa forma, os estudantes aprendem a manipular um banco de dados, utilizando a
                             linguagem SQL, criando, inserindo, consultando, atualizando e excluindo diferentes
                             dados e tabelas.</p>
+                        <img src={image_db} alt="Banco de Dados" />
 
                         <li>Redes de Computadores</li>
                         <p>Na matéria de redes de computadores, os alunos estudam detalhadamente como

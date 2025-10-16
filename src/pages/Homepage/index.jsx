@@ -132,12 +132,12 @@ export function Homepage() {
                                         Começar Aventura! 🚀
                                     </button>
                                 </form>
-                                <button
+                                {/* <button
                                     className={styles.skipButton}
                                     onClick={() => setShowNameInput(false)}
                                 >
                                     Pular
-                                </button>
+                                </button> */}
                             </div>
 
 
