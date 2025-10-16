@@ -25,31 +25,31 @@ export function Scratch() {
         {
             titulo: "Hide & Spooky",
             link: "https://scratch.mit.edu/projects/1223809053/editor/",
-            descricao: "Recrie o famoso jogo Flappy Bird e aprenda conceitos de programação!",
+            descricao: "Jogo de esconde-esconde com tema de Halloween. Divirta-se enquanto aprende programação!",
             caminhoImagem: flappy
         },
         {
             titulo: "Bowling Blast",
-            link: "https://scratch.mit.edu/projects/18262469/editor/",
-            descricao: "Recrie o famoso jogo Flappy Bird e aprenda conceitos de programação!",
+            link: "https://scratch.mit.edu/projects/1205555130/editor/",
+            descricao: "Jogo de boliche divertido e interativo.",
             caminhoImagem: flappy
         },
         {
             titulo: "cat jump!",
             link: "https://scratch.mit.edu/projects/1167544034/editor/",
-            descricao: "Recrie o famoso jogo Flappy Bird e aprenda conceitos de programação!",
+            descricao: "Cat Jump é um jogo simples onde você controla um gato que deve pular sobre obstáculos para ganhar pontos.",
             caminhoImagem: flappy
         },
         {
             titulo: "Pou",
             link: "https://scratch.mit.edu/projects/514497908/editor/",
-            descricao: "Recrie o famoso jogo Flappy Bird e aprenda conceitos de programação!",
+            descricao: "Minigame do Pou recriado no Scratch",
             caminhoImagem: flappy
         },
         {
             titulo: "Cobrinha",
             link: "https://scratch.mit.edu/projects/1229456681/editor/",
-            descricao: "Recrie o famoso jogo Flappy Bird e aprenda conceitos de programação!",
+            descricao: "O clássico jogo da cobrinha, onde você controla uma cobra que cresce ao comer frutas.",
             caminhoImagem: flappy
         }
     ];

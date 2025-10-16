@@ -44,6 +44,8 @@
     font-size: 1.8em;
     margin-bottom: 20px;
     font-weight: bold;
+    margin: 0;
+    margin-bottom: 2rem;
 }
 
 .infoCard p {
@@ -73,6 +75,12 @@
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     animation: bounceIn 1s ease;
     box-shadow: 0 15px 35px rgba(255, 154, 158, 0.3);
+}
+
+li {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-top: 2rem;
 }
 
 .achievement h3 {

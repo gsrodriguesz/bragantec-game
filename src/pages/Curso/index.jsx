@@ -29,23 +29,65 @@ export function Curso() {
                 <div className={styles.infoCard}>
                     <h2>💻 O que você vai aprender</h2>
                     <ul>
-                        <li>Lógica de programação</li>
-                        <p>Aprendemos a pensar como programadores, vendo o básico da programação. Vemos o que é algoritmo e como construir um, além de conceitos fundamentais como variáveis, estruturas de decisão e repetição, etc. Essa base é essencial para que os alunos entendam outras linguagens de programação que venham a aprender.
+                        <li>PJI - Projeto Integrador</li>
+                        <p>A matéria de projeto integrador tem como objetivo realizar a integração entre vários
+                            componentes curriculares do curso</p>
+                        <p>Para isso, os alunos são instigados a desenvolver uma solução tecnológica, com o
+                            intuito de colaborar com alguma demanda social.
                         </p>
-                        <p>Algoritmo = receita, lista de passos do que fazer. <br />Linguagem de programação = é a língua que você vai escrever o seu algoritmo.</p>
-
-                        <li>Linguagem técnica</li>
-                        <p>É aqui que vemos as linguagens de programação, em que começamos aprendendo a programar o básico com ela e gradualmente nos aprofundando.
-                            Ex.: C#, Python, Java.
+                        <p>Assim, formam-se grupos, cada qual responsável pelo seu projeto. A partir disso,
+                            uma série de pesquisas, investigações e metodologias de projeto são elaboradas.
+                            No decorrer do tempo, o professor responsável auxilia os alunos em cada etapa,
+                            estipulando datas para entregas de cada fase do plano.
                         </p>
 
-                        <li>Programação Web</li>
-                        <p>Os alunos aprendem a criar sites e aplicações para a internet. Na matéria, são estudadas linguagens de programação web (HTML, CSS, JavaScript, JSX) que formam a base de qualquer página web. Vemos também estruturação de conteúdo, design responsivo (para sites funcionarem bem em celulares e computadores) e interatividade com o usuário (tipo fazer alguma ação quando o usuário clicar em algum botão).</p>
+                        <li>Banco de Dados</li>
+                        <p>Os alunos aprendem do que se trata um banco de dados e qual a sua importância
+                            em um sistema. Além disso, ocorre o planejamento da organização dos dados,
+                            denominado modelagem; assim, entidades, atributos e relacionamentos são
+                            identificados. Também ocorre a criação de modelos lógicos e conceituais, os quais
+                            serão utilizados para a construção de uma simulação real no banco. Por exemplo:
+                            construir um diagrama de uma situação de aluguel de veículos, com tabelas de
+                            clientes, aluguéis e automóveis.
+                        </p>
+                        <p>Dessa forma, os estudantes aprendem a manipular um banco de dados, utilizando a
+                            linguagem SQL, criando, inserindo, consultando, atualizando e excluindo diferentes
+                            dados e tabelas.</p>
 
-                        <li>Projeto Integrador</li>
-                        <p>A matéria de projeto integrador, conhecida como PJI.
-                            É uma matéria, que tem como objetivo criarmos algum projeto que busca solucionar algum problema social, utilizando os conhecimentos do nosso curso técnico em informática
-                            Daqui a pouco nós mostraremos alguns projetos para vocês.</p>
+                        <li>Redes de Computadores</li>
+                        <p>Na matéria de redes de computadores, os alunos estudam detalhadamente como
+                            ocorre a comunicação entre máquinas. Para isso, é necessário o entendimento dos
+                            diferentes tipos de redes, estas que são determinadas por áreas de alcance, como a
+                            LAN (rede local), WAN (rede ampla) E WLAN (rede sem fio).
+                        </p>
+                        <p>Além do mais, cada componente da rede é estudado, como, por exemplo, o
+                            roteador, o switch, o modem, cabos e conectores presentes no sistema.
+                        </p>
+                        <p>Mas, precisamente no segundo ano do curso, os estudantes conhecem as camadas
+                            de comunicação e o passo a passo do compartilhamento de informações entre
+                            máquinas, como uma mensagem chega a outra e os processos envolvidos para isso
+                            acontecer, por exemplo.</p>
+                        <p>Ademais, conhecimentos de configurações de IPs e conexões são passados, unindo
+                            a proteção e o monitoramento seguro da rede.</p>
+
+                        <li>Empreendedorismo</li>
+                        <p>Em empreendedorismo, os alunos são estimulados a desenvolver modelos de
+                            negócios inovadores; além disso, atividades de gestão financeira em grupo são
+                            colocadas em prática.
+                        </p>
+                        <p>Nessa matéria, os estudantes entendem do que se trata um empreendedor, as
+                            características relacionadas ao empreendedorismo e como um bom modelo de
+                            negócio pode se diferenciar no mercado, além do impacto no desenvolvimento local
+                            e no aumento da empregabilidade.
+                        </p>
+                        <p>Ademais, os alunos têm a oportunidade de pensar e criar uma ideia de negócio, a
+                            qual será, ao longo das aulas, aprimorada, visando um real estudo das demandas
+                            de cada projeto.
+                        </p>
+                        <p>Dessa forma, as aulas de empreendedorismo tornam-se uma forte aliada para o
+                            desenvolvimento profissional e pessoal dos estudantes, visando uma boa análise e
+                            tomadas de decisões responsáveis.</p>
+
                     </ul>
                 </div>
 
