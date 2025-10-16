@@ -1,0 +1,10 @@
+# Ignorar arquivos de API no frontend
+api/
+!api/
+api/**/*
+
+# Cache do Vite
+node_modules/.vite/
+
+# Logs
+*.log
