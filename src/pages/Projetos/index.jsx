@@ -18,7 +18,7 @@ import dinhero_5 from "../../assets/img/dinhero/5.png";
 import dinhero_6 from "../../assets/img/dinhero/6.png";
 
 // Beesaver imports
-import beesaver_logo from "../../assets/img/beesaver/logo.png";
+import beesaver_logo from "../../assets/img/beesaver/logo.jpg";
 import beesaver_0 from "../../assets/img/beesaver/0.png";
 import beesaver_1 from "../../assets/img/beesaver/1.png";
 import beesaver_2 from "../../assets/img/beesaver/2.png";
@@ -31,6 +31,12 @@ import petag_logo from "../../assets/img/petag/logo.png";
 import petag_0 from "../../assets/img/petag/0.jpg";
 import petag_1 from "../../assets/img/petag/1.jpg";
 import petag_2 from "../../assets/img/petag/2.jpg";
+
+// MonitorIF imports
+import monitorif_logo from "../../assets/img/monitorif.jpg";
+
+// Caminho Leve MC imports
+import caminholevemc_logo from "../../assets/img/mc.webp";
 
 
 export function Projetos() {
@@ -88,6 +94,7 @@ export function Projetos() {
             nomesDosIntegrantes: "Julio César Pinto de Souza, Gustavo Barbosa de Pieri, Guilherme Salles Leite",
             descricao: "Site para organizar os encontros de monitoria acadêmica",
             descricaoCompleta: "site para organizar os encontros de monitoria acadêmica em escolas de âmbito federal, buscando otimizar o aproveitamento do tempo e melhorar a comunicação entre monitores e estudantes. A proposta visa resolver um problema recorrente na gestão dessas monitorias, que ainda ocorre de forma informal e desorganizada, comprometendo a eficácia do apoio pedagógico oferecido aos alunos.",
+            caminhoImagem: monitorif_logo,
             imagens: [],
             tecnologias: ['Python', 'JavaScript', 'HTML', 'CSS', 'SQL'],
         },
@@ -96,6 +103,7 @@ export function Projetos() {
             nomesDosIntegrantes: "Emanuelly Arantes de Oliveira",
             descricao: "Plataforma de Apoio e Informação sobre a Miastenia Congênita",
             descricaoCompleta: "A Miastenia Congênita (MC) é uma doença neuromuscular genética rara e pouco conhecida do público em geral. Este projeto tem como objetivo o desenvolvimento de uma plataforma digital acessível voltada ao apoio e à informação sobre. Devido à escassez de dados acessíveis e ao alto índice de diagnósticos tardios, muitos pacientes enfrentam preconceito, desinformação e isolamento social. A proposta da plataforma “Caminho Leve MC” é oferecer um espaço acolhedor, no qual pacientes, familiares e profissionais possam compartilhar informações, experiências e apoio emocional. A iniciativa se baseia em vivências pessoais da autora e utiliza a pesquisa bibliográfica e exploratória. O projeto será desenvolvido usando metodologias da engenharia de software, como análise e levantamento de requisitos, de sistemas similares correlatos e desenvolvimento de protótipo funcional. Espera-se que o projeto apresente de forma clara e fácil as informações para as pessoas, os familiares e o público em geral, além de oferecer um canal de afeto e troca de informações entre os usuários.",
+            caminhoImagem: caminholevemc_logo,
             imagens: [],
             tecnologias: ['Sem informação'],
         }
