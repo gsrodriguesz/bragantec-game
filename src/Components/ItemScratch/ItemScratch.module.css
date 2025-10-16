@@ -102,6 +102,10 @@
     margin-bottom: 24px;
 }
 
+a:hover{
+    color: white;
+}
+
 .integrantesSection h3 {
     margin: 0 0 8px 0;
     font-size: 1.1rem;

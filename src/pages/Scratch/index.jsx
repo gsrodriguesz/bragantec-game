@@ -5,7 +5,11 @@ import flappy from "../../assets/img/flappy.png";
 import styles from "./Scratch.module.css";
 
 export function Scratch() {
-    const { visitPage, gameState } = useGame();
+    const { visitPage, addXP, gameState } = useGame();
+
+    const handleProjectClick = () => {
+        addXP(25);
+    };
 
     useEffect(() => {
         visitPage('scratch');
@@ -20,31 +24,31 @@ export function Scratch() {
         },
         {
             titulo: "Hide & Spooky",
-            link: "https://scratch.mit.edu/projects/1223809053",
+            link: "https://scratch.mit.edu/projects/1223809053/editor/",
             descricao: "Recrie o famoso jogo Flappy Bird e aprenda conceitos de programação!",
             caminhoImagem: flappy
         },
         {
             titulo: "Bowling Blast",
-            link: "https://scratch.mit.edu/projects/18262469/",
+            link: "https://scratch.mit.edu/projects/18262469/editor/",
             descricao: "Recrie o famoso jogo Flappy Bird e aprenda conceitos de programação!",
             caminhoImagem: flappy
         },
         {
             titulo: "cat jump!",
-            link: "https://scratch.mit.edu/projects/1167544034",
+            link: "https://scratch.mit.edu/projects/1167544034/editor/",
             descricao: "Recrie o famoso jogo Flappy Bird e aprenda conceitos de programação!",
             caminhoImagem: flappy
         },
         {
             titulo: "Pou",
-            link: "https://scratch.mit.edu/projects/514497908",
+            link: "https://scratch.mit.edu/projects/514497908/editor/",
             descricao: "Recrie o famoso jogo Flappy Bird e aprenda conceitos de programação!",
             caminhoImagem: flappy
         },
         {
             titulo: "Cobrinha",
-            link: "https://scratch.mit.edu/projects/1229456681",
+            link: "https://scratch.mit.edu/projects/1229456681/editor/",
             descricao: "Recrie o famoso jogo Flappy Bird e aprenda conceitos de programação!",
             caminhoImagem: flappy
         }
@@ -70,7 +74,8 @@ export function Scratch() {
 
                 <div className={styles.projectsSection}>
                     <h2>🎯 Projetos para Explorar</h2>
-                    <div className={styles.projects}>
+
+                    <div className={styles.projects} onClick={handleProjectClick}>
                         {scratchProjects.map((projeto, index) => (
                             <ItemScratch
                                 key={index}
