@@ -35,7 +35,7 @@ export function Homepage() {
         <>
             <div className={styles.container}>
                 <div className={styles.hero}>
-                    <img src={bragantec} alt="Bragantec Logo" className={styles.logo} />
+                    <img draggable='false' src={bragantec} alt="Bragantec Logo" className={styles.logo} />
                     <h1 className={styles.title}>
                         Bem-vindos à 15° Bragantec! 🚀
                     </h1>

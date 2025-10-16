@@ -39,7 +39,7 @@ export function Curso() {
 
                         <li>Linguagem técnica</li>
                         <p>É aqui que vemos as linguagens de programação, em que começamos aprendendo a programar o básico com ela e gradualmente nos aprofundando. Ex.: C#, Python, Java.</p>
-                        <img src={image_python} alt="Python" />
+                        <img draggable='false' src={image_python} alt="Python" />
 
                         <li>Programação Web</li>
                         <p>Os alunos aprendem a criar sites e aplicações para a internet. Na matéria, são estudadas linguagens de programação web (HTML, CSS, JavaScript, JSX) que formam a base de qualquer página web. Vemos também estruturação de conteúdo, design responsivo (para sites funcionarem bem em celulares e computadores) e interatividade com o usuário (tipo fazer alguma ação quando o usuário clicar em algum botão).</p>
@@ -68,7 +68,7 @@ export function Curso() {
                         <p>Dessa forma, os estudantes aprendem a manipular um banco de dados, utilizando a
                             linguagem SQL, criando, inserindo, consultando, atualizando e excluindo diferentes
                             dados e tabelas.</p>
-                        <img src={image_db} alt="Banco de Dados" />
+                        <img draggable='false' src={image_db} alt="Banco de Dados" />
 
                         <li>Redes de Computadores</li>
                         <p>Na matéria de redes de computadores, os alunos estudam detalhadamente como
