@@ -1,23 +1,45 @@
+import { getSecurityHeaders, secureFetch, handleSecurityError, apiRateLimit } from '../utils/security.js';
+
 const API_BASE_URL = process.env.NODE_ENV === 'production'
-    ? '/api' 
-    : 'http://localhost:3001/api'; 
+    ? '/api'
+    : '/api'; // Usar Vercel dev para desenvolvimento também
 
 const apiRequest = async (endpoint, options = {}) => {
     try {
+        // Verificar rate limiting no cliente
+        if (!apiRateLimit.canMakeRequest()) {
+            const resetTime = Math.ceil(apiRateLimit.getTimeUntilReset() / 1000);
+            throw new Error(`Rate limit atingido. Tente novamente em ${resetTime} segundos.`);
+        }
+
         const url = `${API_BASE_URL}${endpoint}`;
+        const securityHeaders = await getSecurityHeaders();
+
         const config = {
             headers: {
-                'Content-Type': 'application/json',
+                ...securityHeaders,
                 ...options.headers
             },
+            credentials: 'include',
             ...options
         };
 
         const response = await fetch(url, config);
-        const data = await response.json();
+
+        // Verificar se a resposta é JSON válida
+        let data;
+        try {
+            data = await response.json();
+        } catch (parseError) {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            data = {};
+        }
 
         if (!response.ok) {
-            throw new Error(data.error || 'Erro na requisição');
+            handleSecurityError(data, response);
+            throw new Error(data.error || `HTTP ${response.status}: ${response.statusText}`);
         }
 
         return data;
@@ -62,10 +84,12 @@ export const userAPI = {
 
 export const checkAPIAvailable = async () => {
     try {
-        await userAPI.healthCheck();
+        // Tentar uma requisição simples para verificar disponibilidade
+        await userAPI.getAllUsers();
+        console.log('✅ API segura disponível');
         return true;
     } catch (error) {
-        console.warn('API não disponível, usando localStorage como fallback');
+        console.warn('⚠️ API segura não disponível, usando localStorage como fallback:', error.message);
         return false;
     }
 };

@@ -4,9 +4,16 @@ export default function handler(req, res) {
     }
 
     res.status(200).json({
-        status: 'OK',
-        message: 'API Bragantec funcionando',
+        status: 'healthy',
+        message: 'API Bragantec funcionando com segurança ativada',
         timestamp: new Date().toISOString(),
-        environment: 'Vercel Serverless'
+        environment: 'Vercel Serverless',
+        security: {
+            cors: 'enabled',
+            rateLimit: 'enabled',
+            authentication: 'enabled',
+            validation: 'enabled'
+        },
+        version: '2.0.0'
     });
 }
