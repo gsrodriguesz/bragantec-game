@@ -1,49 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=BBH+Sans+Bartle&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
-.containerMaior{
+.containerMaior {
     display: flex;
     flex-direction: row;
-width: 100%;
-height: 400px;
-
-margin-top: 60px;
-color: white;
-justify-content: center;
-align-items: center;
-
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
-.containerEsquerdo{
+
+.containerMaior:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.containerEsquerdo {
+    flex: 3;
+    padding: 40px;
     display: flex;
     flex-direction: column;
-width: 40vw;
-height: 400px;
-
-align-items: center;
-justify-content: center;
-padding: 10px 20px 10px 20px;
-
-background-color: #4a4e69;
-border-bottom: #457b9d solid 2px;
-
+    justify-content: center;
+    align-items: center;
 }
-.containerDireito{
+
+.containerDireito {
+    flex: 2;
     display: flex;
-    flex-direction: column;
-    width: 40vw;
-    height: 400px;
-    
     align-items: center;
     justify-content: center;
-    padding: 10px 20px 10px 20px;
-
-    background-color: #4a4e69;
-    border-bottom: #457b9d solid 2px;
-
 }
-img{
-    height: 250px;
-    width: 250px;
-    border-radius: 5px;
+
+.titulo {
+    margin: 0 0 16px 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.2;
+    font-family: "BBH Sans Bartle", sans-serif;
 }
-.legenda{
-    font-size: 20px;
+
+.descricao {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.integrantes {
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 0;
+}
+
+.imagem {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal styles */
+.modalDescription {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+.tecnologias {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.tecnologias h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.1rem;
+    color: #2d3748;
+}
+
+.tecnologiasList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tecnologiaTag {
+    background: #e2e8f0;
+    color: #2d3748;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.integrantesSection {
+    margin-bottom: 24px;
+}
+
+.integrantesSection h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    color: #2d3748;
+}
+
+.integrantesSection p {
+    margin: 0;
+}
+
+.imagensSection h3 {
+    margin: 0 0 16px 0;
+    font-size: 1.1rem;
+    color: #2d3748;
+}
+
+/* Layout tipo Pinterest para as imagens */
+.pinterestGrid {
+    column-count: 3;
+    column-gap: 16px;
+    column-fill: balance;
+}
+
+.pinterestItem {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 16px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.modalImage {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modalImage:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsividade do grid Pinterest */
+@media (max-width: 768px) {
+    .pinterestGrid {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 480px) {
+    .pinterestGrid {
+        column-count: 1;
+    }
+}
+
+/* Botão de redirecionamento externo */
+.botaoSection {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    padding-top: 24px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.botaoExterno {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.botaoExterno::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.botaoExterno:hover::before {
+    left: 100%;
+}
+
+.botaoExterno:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.botaoExterno:active {
+    transform: translateY(0);
 }

@@ -17,6 +17,36 @@ export function Scratch() {
             link: "https://scratch.mit.edu/projects/18262469/editor/",
             descricao: "Recrie o famoso jogo Flappy Bird e aprenda conceitos de programação!",
             caminhoImagem: flappy
+        },
+        {
+            titulo: "Hide & Spooky",
+            link: "https://scratch.mit.edu/projects/1223809053",
+            descricao: "Recrie o famoso jogo Flappy Bird e aprenda conceitos de programação!",
+            caminhoImagem: flappy
+        },
+        {
+            titulo: "Bowling Blast",
+            link: "https://scratch.mit.edu/projects/18262469/",
+            descricao: "Recrie o famoso jogo Flappy Bird e aprenda conceitos de programação!",
+            caminhoImagem: flappy
+        },
+        {
+            titulo: "cat jump!",
+            link: "https://scratch.mit.edu/projects/1167544034",
+            descricao: "Recrie o famoso jogo Flappy Bird e aprenda conceitos de programação!",
+            caminhoImagem: flappy
+        },
+        {
+            titulo: "Pou",
+            link: "https://scratch.mit.edu/projects/514497908",
+            descricao: "Recrie o famoso jogo Flappy Bird e aprenda conceitos de programação!",
+            caminhoImagem: flappy
+        },
+        {
+            titulo: "Cobrinha",
+            link: "https://scratch.mit.edu/projects/1229456681",
+            descricao: "Recrie o famoso jogo Flappy Bird e aprenda conceitos de programação!",
+            caminhoImagem: flappy
         }
     ];
 
